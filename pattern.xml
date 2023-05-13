@@ -1,0 +1,264 @@
+<pxml>
+    <php>
+        <pattern>
+            <code><![CDATA[\<form.*php]]></code>
+            <type>Using the form tag to trigger PHP page actions may result in XSS vulnerabilities.///使用form标签触发php页面动作，可能存在XSS漏洞</type>
+        </pattern>
+        <pattern>
+            <code><![CDATA[\<input]]></code>
+            <type>By using the input tag, the value may be vulnerable to script injection and potential XSS vulnerabilities.///使用input标签，value值可能被利用注入脚本，可能存在XSS漏洞</type>
+        </pattern>
+        <pattern>
+            <code>href\=</code>
+            <type>By using the 'a' tag, the href value may be vulnerable to script injection and potential XSS vulnerabilities.///使用a标签，href值可能被利用注入脚本，可能存在XSS漏洞</type>
+        </pattern>
+        <pattern>
+            <code><![CDATA[\<script\>]]></code>
+            <type>By using the script tag, variable values may be vulnerable to script injection and potential XSS vulnerabilities.///使用script标签，变量值可能被利用注入脚本，可能存在XSS漏洞</type>
+        </pattern>
+        <pattern>
+            <code>href\=</code>
+            <type>By using the 'a' tag, the href value may be vulnerable to script injection and potential XSS vulnerabilities.///使用a标签，href值可能被利用注入脚本，可能存在XSS漏洞</type>
+        </pattern>
+        <pattern>
+            <code>md5\(.*\)|MD5|OPENSSL_ALGO_SHA256|hash\(\'sha256\'</code>
+            <type>Cryptographic Failures. Using the easily crackable MD5 or SHA256 algorithm, it is recommended to switch to AES or RSA algorithms.///加密机制失效。使用易破解的MD5或SHA256算法，推荐改为AES或者RSA算法</type>
+        </pattern>
+        <pattern>
+            <code>.*select.*from.*</code>
+            <type>SQL statement execution point, there may be SQL injection.///sql语句执行点，可能存在sql注入</type>
+        </pattern>
+        <pattern>
+            <code>eval\(.*\)</code>
+            <type>The eval() can execute any php code, vulnerable function.///eval可执行任意php代码，危险函数</type>
+        </pattern>
+        <pattern>
+            <code>assert\(.*\)</code>
+            <type>The assert() can execute any php code, vulnerable function.///assert可执行任意php代码，危险函数</type>
+        </pattern>
+        <pattern>
+            <code>(include|require|include_once|require_once)\(.*\)</code>
+            <type>File inclusion operation, need to ensure that the parameters are not controllable, otherwise there may be file inclusion vulnerability.///文件包含操作，需保证参数不可控，否则可能存在文件包含漏洞</type>
+        </pattern>
+        <pattern>
+            <code>move_uploaded_file\(.*\)</code>
+            <type>File upload function point, possible file upload vulnerability.///文件上传功能点，可能存在文件上传漏洞</type>
+        </pattern>
+        <pattern>
+            <code>unserialize\(.*\)</code>
+            <type>Deserialization function, need to ensure that the parameters are not controllable, otherwise there may be a deserialization vulnerability.///反序列化函数，需保证参数不可控，否则可能存在反序列化漏洞</type>
+        </pattern>
+        <pattern>
+            <code>parse_str\(.*\)</code>
+            <type>Parsing variables, possible variable override vulnerability.///解析变量，可能存在变量覆盖漏洞</type>
+        </pattern>
+        <pattern>
+            <code>\(.*==.*\)</code>
+            <type>Use weak type comparison, may be bypassed, try to use ===.///使用弱类型比较，可能被绕过，尽量使用===</type>
+        </pattern>
+        <pattern>
+            <code>(system|exec|shell_exec|passthru|pcntl_exec|popen|proc_open)\(.*\)</code>
+            <type>Command execution function, improper use may cause command injection vulnerability.///命令执行函数，使用不当可能造成命令注入漏洞</type>
+        </pattern>
+        <pattern>
+            <code>(file_get_contents|readfile)\(.*\)</code>
+            <type>File read, possible arbitrary file read vulnerability.///文件读，可能出现任意文件读漏洞</type>
+        </pattern>
+        <pattern>
+            <code>(file_put_contents)\(.*\)</code>
+            <type>File write, possible arbitrary file write vulnerability.///文件写，可能出现任意文件写漏洞</type>
+        </pattern>
+    </php>
+    <js>
+        <pattern>
+            <code>md5\(.*\)|MD5|sha256|SHA256</code>
+            <type>Cryptographic Failures. Using the easily crackable MD5 or SHA256 algorithm, it is recommended to switch to AES or RSA algorithms.///加密机制失效。使用易破解的MD5或SHA256算法，推荐改为AES或者RSA算法</type>
+        </pattern>
+        <pattern>
+            <code>.*select.*from.*</code>
+            <type>SQL statement execution point, there may be SQL injection.///sql语句执行点，可能存在sql注入</type>
+        </pattern>
+        <pattern>
+            <code>location.href</code>
+            <type>There are page redirects that may be exploited, try to use whitelist filtering.///存在页面重定向，可能被利用，尽量使用白名单过滤</type>
+        </pattern>
+        <pattern>
+            <code>(window.open|location.assign|location.replace)\(.*\)</code>
+            <type>There are page redirects that may be exploited, try to use whitelist filtering.///存在页面重定向，可能被利用，尽量使用白名单过滤</type>
+        </pattern>
+        <pattern>
+            <code>eval\(.*\)</code>
+            <type>Using eval directly, a code injection vulnerability may exist, resulting in arbitrary code execution.///直接使用eval，可能存在代码注入漏洞，造成任意代码执行</type>
+        </pattern>
+        <pattern>
+            <code>innerHTML=|outerHTML=</code>
+            <type>For html tag manipulation, there may be XSS vulnerability, need to filter the special characters.///对html标签操作，可能存在XSS漏洞，需对特殊字符过滤</type>
+        </pattern>
+        <pattern>
+            <code>(document.write|document.writeln)\(.*\)</code>
+            <type>For html tag manipulation, there may be XSS vulnerability, need to filter the special characters.///对html标签操作，可能存在XSS漏洞，需对特殊字符过滤</type>
+        </pattern>
+        <pattern>
+            <code>child_process\.(exec|execSync|spawn|spawnSync|execFile|execFileSync)\(.*\)</code>
+            <type>Execution of system commands using child_process() may be vulnerable to command injection.///使用child_process执行系统命令，可能存在命令注入漏洞</type>
+        </pattern>
+        <pattern>
+            <code>fs\..*\(.*\)</code>
+            <type>File operations are performed using fs, and there may be arbitrary file read/write vulnerabilities.///使用fs进行了文件操作，可能存在任意文件读写漏洞</type>
+        </pattern>
+    </js>
+    <asp>
+        <pattern>
+            <code>eval|execute|ExecuteGlobal|Eval</code>
+            <type>Dangerous functions, use with caution.///危险函数，谨慎使用</type>
+        </pattern>
+        <pattern>
+            <code>location\.href</code>
+            <type>There are page redirects that may be exploited, try to use whitelist filtering.///存在页面重定向，可能被利用，尽量使用白名单过滤</type>
+        </pattern>
+        <pattern>
+            <code>(window.open|location.assign|location.replace)\(.*\)</code>
+            <type>There are page redirects that may be exploited, try to use whitelist filtering.///存在页面重定向，可能被利用，尽量使用白名单过滤</type>
+        </pattern>
+        <pattern>
+            <code>innerHTML\=|outerHTML\=</code>
+            <type>For html tag manipulation, there may be XSS vulnerability, need to filter the special characters.///对html标签操作，可能存在XSS漏洞，需对特殊字符过滤</type>
+        </pattern>
+        <pattern>
+            <code>(document\.write|document\.writeln)\(.*\)</code>
+            <type>For html tag manipulation, there may be XSS vulnerability, need to filter the special characters.///对html标签操作，可能存在XSS漏洞，需对特殊字符过滤</type>
+        </pattern>
+    </asp>
+    <html>
+        <pattern>
+            <code>jquery\/1\.|jquery\-1\.</code>
+            <type>The JQuery version is too low, which may cause XSS security vulnerabilities.///JQuery版本过低，可能导致XSS安全漏洞。</type>
+        </pattern>
+        <pattern>
+            <code><![CDATA[\<input]]></code>
+            <type>By using the input tag, the value may be vulnerable to script injection and potential XSS vulnerabilities.///使用input标签，value值可能被利用注入脚本，可能存在XSS漏洞</type>
+        </pattern>
+        <pattern>
+            <code><![CDATA[\<form.*php]]></code>
+            <type>Using the form tag to trigger PHP page actions may result in XSS vulnerabilities.///使用form标签触发php页面动作，可能存在XSS漏洞。</type>
+        </pattern>
+        <pattern>
+            <code>href\=</code>
+            <type>By using the 'a' tag, the href value may be vulnerable to script injection and potential XSS vulnerabilities.///使用a标签，href值可能被利用注入脚本，可能存在XSS漏洞</type>
+        </pattern>
+        <pattern>
+            <code>md5\(.*\)|MD5|sha256|SHA256</code>
+            <type>Cryptographic Failures. Using the easily crackable MD5 or SHA256 algorithm, it is recommended to switch to AES or RSA algorithms.///加密机制失效。使用易破解的MD5或SHA256算法，推荐改为AES或者RSA算法</type>
+        </pattern>
+        <pattern>
+            <code>\.*select\.*from\.*</code>
+            <type>SQL statement execution point, there may be SQL injection.///sql语句执行点，可能存在sql注入</type>
+        </pattern>
+        <pattern>
+            <code>location\.href</code>
+            <type>There are page redirects that may be exploited, try to use whitelist filtering.///存在页面重定向，可能被利用，尽量使用白名单过滤</type>
+        </pattern>
+        <pattern>
+            <code>(window\.open|location\.assign|location\.replace)\(.*\)</code>
+            <type>There are page redirects that may be exploited, try to use whitelist filtering.///存在页面重定向，可能被利用，尽量使用白名单过滤</type>
+        </pattern>
+        <pattern>
+            <code>eval\(.*\)</code>
+            <type>Using eval() directly, a code injection vulnerability may exist, resulting in arbitrary code execution.///直接使用eval，可能存在代码注入漏洞，造成任意代码执行</type>
+        </pattern>
+        <pattern>
+            <code>innerHTML\=|outerHTML\=</code>
+            <type>For html tag manipulation, there may be XSS vulnerability, need to filter the special characters.///对html标签操作，可能存在XSS漏洞，需对特殊字符过滤</type>
+        </pattern>
+        <pattern>
+            <code>(document\.write|document\.writeln)\(.*\)</code>
+            <type>For html tag manipulation, there may be XSS vulnerability, need to filter the special characters.///对html标签操作，可能存在XSS漏洞，需对特殊字符过滤</type>
+        </pattern>
+        <pattern>
+            <code>child_process\.(exec|execSync|spawn|spawnSync|execFile|execFileSync)\(.*\)</code>
+            <type>Execution of system commands using child_process() may be vulnerable to command injection.///使用child_process执行系统命令，可能存在命令注入漏洞</type>
+        </pattern>
+        <pattern>
+            <code>fs\..*\(.*\)</code>
+            <type>File operations are performed using fs, and there may be arbitrary file read/write vulnerabilities.///使用fs进行了文件操作，可能存在任意文件读写漏洞</type>
+        </pattern>
+        <pattern>
+            <code>assert\(.*\)</code>
+            <type>assert() executable code, vulnerable functions.///assert可执行代码，危险函数</type>
+        </pattern>
+        <pattern>
+            <code>(include|require|include_once|require_once)\(.*\)</code>
+            <type>File inclusion operation, need to ensure that the parameters are not controllable, otherwise there may be file inclusion vulnerability.///文件包含操作，需保证参数不可控，否则可能存在文件包含漏洞</type>
+        </pattern>
+        <pattern>
+            <code>move_uploaded_file\(.*\)</code>
+            <type>File upload function point, possible file upload vulnerability File upload function point, possible file upload vulnerability.///文件上传功能点，可能存在文件上传漏洞</type>
+        </pattern>
+        <pattern>
+            <code>unserialize\(.*\)</code>
+            <type>Deserialization function, need to ensure that the parameters are not controllable, otherwise there may be a deserialization vulnerability.///反序列化函数，需保证参数不可控，否则可能存在反序列化漏洞</type>
+        </pattern>
+        <pattern>
+            <code>parse_str\(.*\)</code>
+            <type>Parsing variables, possible variable override vulnerability.///解析变量，可能存在变量覆盖漏洞</type>
+        </pattern>
+        <pattern>
+            <code>\(.*==.*\)</code>
+            <type>Use weak type comparison, may be bypassed, try to use ===.///使用弱类型比较，可能被绕过，尽量使用===</type>
+        </pattern>
+        <pattern>
+            <code>(system|exec|shell_exec|passthru|pcntl_exec|popen|proc_open)\(.*\)</code>
+            <type>Command execution function, improper use may cause command injection vulnerability.///命令执行函数，使用不当可能造成命令注入漏洞</type>
+        </pattern>
+    </html>
+    <java>
+        <pattern>
+            <code>MessageDigest\.getInstance\(\"MD5\"\)|MessageDigest\.getInstance\(\"SHA\-256\"\)</code>
+            <type>Cryptographic Failures. Using the easily crackable MD5 or SHA256 algorithm, it is recommended to switch to AES or RSA algorithms.///加密机制失效。使用易破解的MD5或SHA256算法，推荐改为AES或者RSA算法</type>
+        </pattern>
+        <pattern>
+            <code>\.*select\.*from\.*</code>
+            <type>SQL statement execution point, there may be SQL injection.///sql语句执行点，可能存在sql注入</type>
+        </pattern>
+        <pattern>
+            <code>DocumentBuilderFactory|saxReader|SAXBuilder|XMLReader</code>
+            <type>There is parsing XML behavior and possible XXE vulnerability.///有解析XML行为，可能存在XXE漏洞</type>
+        </pattern>
+        <pattern>
+            <code>Runtime\.getRuntime|ProcessBuilder</code>
+            <type>There is an execution OS command behavior, there may be a command execution vulnerability.///有执行OS命令行为，可能存在命令执行漏洞</type>
+        </pattern>
+    </java>
+    <python>
+        <pattern>
+            <code>hashlib\.sha256\(\)|hashlib\.md5\(\)</code>
+            <type>Cryptographic Failures. Using the easily crackable MD5 or SHA256 algorithm, it is recommended to switch to AES or RSA algorithms.///加密机制失效。使用易破解的MD5或SHA256算法，推荐改为AES或者RSA算法</type>
+        </pattern>
+        <pattern>
+            <code>\.*select\.*from\.*</code>
+            <type>SQL statement execution point, there may be SQL injection.///sql语句执行点，可能存在sql注入</type>
+        </pattern>
+        <pattern>
+            <code>(os\.system|os\.popen|subprocess\.call)\(.*\)</code>
+            <type>There is an execution OS command behavior, there may be a command execution vulnerability.///有执行OS命令行为，可能存在命令执行漏洞</type>
+        </pattern>
+        <pattern>
+            <code>etree\.parse\(.*\)</code>
+            <type>There is parsing XML behavior and possible XXE vulnerability.///有解析XML行为，可能存在XXE漏洞</type>
+        </pattern>
+    </python>
+    <jsp>
+        <pattern>
+            <code>\.*select\.*from\.*</code>
+            <type>SQL statement execution point, there may be SQL injection.///sql语句执行点，可能存在sql注入</type>
+        </pattern>
+        <pattern>
+            <code>DocumentBuilderFactory|saxReader|SAXBuilder|XMLReader</code>
+            <type>There is parsing XML behavior and possible XXE vulnerability.///有解析XML行为，可能存在XXE漏洞</type>
+        </pattern>
+        <pattern>
+            <code>Runtime\.getRuntime|ProcessBuilder</code>
+            <type>There is an execution OS command behavior, there may be a command execution vulnerability.///有执行OS命令行为，可能存在命令执行漏洞</type>
+        </pattern>
+    </jsp>
+</pxml>
